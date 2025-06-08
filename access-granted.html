@@ -42,7 +42,10 @@
     const expiresAt = Date.now() + (24 * 60 * 60 * 1000);
     localStorage.setItem('verifiedUntil', expiresAt);
 
-    document.cookie = "verified_access=true; max-age=86400; path=/";
+    // Set persistent cookie with explicit expiration date
+    const expireDate = new Date(expiresAt).toUTCString();
+    document.cookie = "verified_access=true; expires=" + expireDate + "; path=/";
+
     const params = new URLSearchParams(window.location.search);
     const rawUrl = params.get('url') || '';
     const title = params.get('title');
