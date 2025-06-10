@@ -74,15 +74,16 @@
     }
 
     .card {
-      background-color: #1c1c1c;
-      padding: 1rem;
-      border-radius: 0.75rem;
-      text-align: center;
-      border: 2px solid transparent;
-      opacity: 1;
-      transform: scale(1);
-      pointer-events: auto;
-      user-select: none;
+  background-color: #1c1c1c;
+  padding: 1rem;
+  border-radius: 0.75rem;
+  text-align: center;
+  border: 2px solid transparent;
+  opacity: 1;
+  transform: scale(1);
+  pointer-events: auto;
+  user-select: none;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border 0.3s ease; /* added */
     }
 
     .card:hover {
