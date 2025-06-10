@@ -109,12 +109,28 @@
     const params = new URLSearchParams(window.location.search);
     const url = params.get('url');
     const title = params.get('title');
-
     const accessKey = `verified_until`;
 
+    // IndexedDB helper to write value
+    function saveToIndexedDB(key, value) {
+      const request = indexedDB.open('AppData', 1);
+      request.onupgradeneeded = function (event) {
+        const db = event.target.result;
+        if (!db.objectStoreNames.contains('store')) {
+          db.createObjectStore('store');
+        }
+      };
+      request.onsuccess = function (event) {
+        const db = event.target.result;
+        const tx = db.transaction('store', 'readwrite');
+        tx.objectStore('store').put(value, key);
+      };
+    }
+
+    // If localStorage is present and valid, proceed
     const verifiedUntil = localStorage.getItem(accessKey);
     if (verifiedUntil && Date.now() < Number(verifiedUntil)) {
-      window.location.href = `https://sankilinkz.netlify.app/access-granted.html?url=${encodeURIComponent(url)}&title=${encodeURIComponent(title || "")}`;
+      window.location.href = `access-granted.html?url=${encodeURIComponent(url)}&title=${encodeURIComponent(title || "")}`;
     }
 
     async function generateAdLink() {
@@ -123,7 +139,7 @@
         return;
       }
 
-      const finalRedirect = `https://sankilinkz.netlify.app/access-granted.html?url=${encodeURIComponent(url)}&title=${encodeURIComponent(title || "")}`;
+      const finalRedirect = `access-granted.html?url=${encodeURIComponent(url)}&title=${encodeURIComponent(title || "")}`;
       const apiToken = '5f48fcdb492e4753beed763bed31181deb9cf091';
       const shortUrlApi = `https://linkshortify.com/api?api=${apiToken}&url=${encodeURIComponent(finalRedirect)}`;
 
@@ -140,6 +156,8 @@
           btn.disabled = false;
           btn.textContent = "Click Here To Verify Task";
         } else {
+          // Save in IndexedDB too
+          saveToIndexedDB(accessKey, Date.now() + 86400000);
           window.location.href = result.shortenedUrl;
         }
       } catch (error) {
@@ -150,7 +168,7 @@
       }
     }
 
-    // Particle background script
+    // Particle background
     const canvas = document.getElementById('particles-bg');
     const ctx = canvas.getContext('2d');
     let particles = [];
