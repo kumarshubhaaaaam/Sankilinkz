@@ -188,6 +188,26 @@
       background: rgba(255,255,255,0.1);
       border-radius: 0.5rem;
     }
+    .floating-contact {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: linear-gradient(45deg, #00d2fc, #007bff);
+  color: #fff;
+  padding: 0.75rem 1.2rem;
+  font-weight: bold;
+  font-size: 1rem;
+  border-radius: 50px;
+  text-decoration: none;
+  box-shadow: 0 4px 12px rgba(0, 210, 252, 0.5);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  z-index: 999;
+}
+.floating-contact:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 16px rgba(0, 210, 252, 0.8);
+  background: linear-gradient(45deg, #007bff, #00d2fc);
+}
 
     @keyframes pulse {
       0% { opacity: 1; }
@@ -198,6 +218,7 @@
 </head>
 <body>
 <canvas id="particles-bg"></canvas>
+  <a href="mailto:contacttodelete@gmail.com" class="floating-contact">✉️ Contact</a>
 
 <!-- Must Visit Stuff Section -->
 <div class="video-section">
@@ -215,10 +236,9 @@
 <!-- Disclaimer Footer -->
 <footer style="text-align:center; color:#aaa; font-size:14px; padding:20px 10px;">
   <p>
-    <strong>Disclaimer:</strong> All videos featured on this site are sourced from external platforms. We do not host or own any of the content. If you believe your rights have been infringed or wish to request removal, please write a
-    <a href="mailto:contacttodelete@gmail.com" target="_blank" style="color:#00afff;">MAIL</a>.
+    <strong>Disclaimer:</strong> All videos featured on this site are sourced from external platforms. We do not host or own any of the content. If you believe your rights have been infringed or wish to request removal, please write a 📨 mail.
   </p>
-</footer>
+    </footer>
 
 <script>
   const sheetID = '1sLNYh9tC3ifiuGMsPydE374Vod1HditqfozFBETjvP8';
