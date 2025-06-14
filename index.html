@@ -208,7 +208,23 @@
   box-shadow: 0 6px 16px rgba(0, 210, 252, 0.8);
   background: linear-gradient(45deg, #007bff, #00d2fc);
 }
-
+  #adblock-warning {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: #0a0a0a;
+    color: white;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 2rem;
+    font-family: 'Inter', sans-serif;
+    font-size: 1.2rem;
+  }
     @keyframes pulse {
       0% { opacity: 1; }
       50% { opacity: 0.5; }
@@ -217,6 +233,10 @@
   </style>
 </head>
 <body>
+  <div id="adblock-warning" style="display: none;">
+  🚫 Please disable your Ad Blocker to access this website. <br><br>
+  We rely on minimal ads to keep this site alive.
+  </div>
 <canvas id="particles-bg"></canvas>
   <a href="mailto:contacttodelete@gmail.com" class="floating-contact">✉️ Contact</a>
 
@@ -465,6 +485,29 @@
 
   initParticles();
   animateParticles();
+
+  function detectAdBlocker(callback) {
+    const adTest = document.createElement('div');
+    adTest.className = 'adsbox';
+    adTest.style.position = 'absolute';
+    adTest.style.height = '1px';
+    adTest.style.width = '1px';
+    adTest.style.left = '-1000px';
+    document.body.appendChild(adTest);
+
+    setTimeout(() => {
+      const blocked = !adTest.offsetHeight;
+      document.body.removeChild(adTest);
+      callback(blocked);
+    }, 100);
+  }
+
+  detectAdBlocker((isBlocked) => {
+    if (isBlocked) {
+      document.body.innerHTML = ''; // optional: wipe rest of content
+      document.getElementById('adblock-warning').style.display = 'flex';
+    }
+  });
 </script>
 </body>
 </html>
