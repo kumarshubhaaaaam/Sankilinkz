@@ -216,11 +216,6 @@
   </style>
 </head>
 <body>
-  <div id="adblock-warning" style="display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: #0a0a0a; color: white; z-index: 9999; display: flex; align-items: center; justify-content: center; flex-direction: column; font-family: 'Inter', sans-serif; font-size: 1.2rem; text-align: center; padding: 2rem;">
-  🚫 <strong>Ad Blocker Detected!</strong><br><br>
-  Please disable your ad blocker to access this website.<br><br>
-  We rely on minimal ads to keep this site alive 🙏
-  </div>
   <canvas id="particles-bg"></canvas>
   <a href="mailto:contacttodelete@gmail.com" class="floating-contact">✉️ Contact</a>
 
@@ -470,23 +465,6 @@
   initParticles();
   animateParticles();
   
-  (function () {
-    const bait = document.createElement('script');
-    bait.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js';
-    bait.async = true;
-
-    bait.onerror = function () {
-      document.getElementById('adblock-warning').style.display = 'flex';
-      document.body.style.overflow = 'hidden';
-    };
-
-    document.body.appendChild(bait);
-  })();
-
-  bait.onerror = function () {
-  document.getElementById('adblock-warning').style.display = 'flex';
-  document.querySelectorAll('body > *:not(#adblock-warning)').forEach(el => el.style.display = 'none');
-};
 </script>
 </body>
 </html>
