@@ -71,7 +71,18 @@
       gap: 2rem;
       padding: 0 2rem;
     }
+.grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2rem;
+  padding: 0 1rem;
+}
 
+.card {
+  max-width: 320px;
+  flex: 1 1 300px;
+}
     .card {
       background-color: #1c1c1c;
       padding: 1rem;
@@ -91,15 +102,15 @@
       border: 2px solid #00d2fc;
     }
 
-    .card img {
-      width: 100%;
-      height: 180px;
-      object-fit: contain;
-      border-radius: 0.5rem;
-      margin-bottom: 1rem;
-      pointer-events: none;
-      background-color: #000;
-    }
+.card img {
+  width: 100%;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 0.5rem;
+  margin-bottom: 1rem;
+  pointer-events: none;
+  background-color: #000;
+}
 
     .card img::selection {
       background: none;
